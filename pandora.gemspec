@@ -9,8 +9,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Anil"]
   s.homepage    = "http://github.com/anilv/pandora"
   s.summary     = %q{Get Music data from Pandora}
-  s.description = %q{With a given username get user's favorite artists, songs. Also recent acitvity,
-                      current station and list of the user created stations.}
+  s.description = %q{A Ruby wrapper for the Pandora public user feeds}
   
   s.add_runtime_dependency 'nokogiri','~> 1.4'
 
