@@ -14,8 +14,6 @@ Gem::Specification.new do |s|
                       current station and list of the user created stations.}
   
   s.add_runtime_dependency 'nokogiri','~> 1.4'
-  
-  s.rubyforge_project = "pandora"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
