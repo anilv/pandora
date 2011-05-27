@@ -7,7 +7,6 @@ Gem::Specification.new do |s|
   s.version     = Pandora::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Anil"]
-  s.email       = [""]
   s.homepage    = "http://github.com/anilv/pandora"
   s.summary     = %q{Get Music data from Pandora}
   s.description = %q{With a given username get user's favorite artists, songs. Also recent acitvity,

@@ -13,7 +13,7 @@ Documentation
 
 Usage
 -----
-This gem only works for public user's; All users did not set 'make my listening activity private'
+This gem only works for public users. All users who did not set 'make my listening activity private'
 
 Usage Examples
 --------------
@@ -21,21 +21,25 @@ Usage Examples
     require "pandora"
 
     # Initialize a new User
-    user = Pandora::User.new("anil")
+    user = Pandora::User.new("joe")
 
     # Get a user's bookmarked songs
-    songs = user.bookmarked_songs 	 # iterate over the songs array for each song
+    songs = user.bookmarked_songs 	  # iterate over the songs array for each song
 
 	# Get a user's bookmarked artits
-	artists = user.bookmarked_artist # iterate over the artists array for each artist
+	artists = user.bookmarked_artists # iterate over the artists array for each artist
 	
 	# Get a user's stations
-	stations = user.stations 		 # iterate over the stations array for each station
+	stations = user.stations 		  # iterate over the stations array for each station
 	
 	# Get a user's station(now playing)
 	station = user.now_playing
 	
 	# Get a user's recent activity
-	activity = user.recent_activity
+	items = user.recent_activity
+	
+TODO
+----
+* TESTS!!!
 
 
