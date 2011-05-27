@@ -6,12 +6,15 @@ Gem::Specification.new do |s|
   s.name        = "pandora"
   s.version     = Pandora::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
-  s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
-
+  s.authors     = ["Anil"]
+  s.email       = [""]
+  s.homepage    = "http://github.com/anilv/pandora"
+  s.summary     = %q{Get Music data from Pandora}
+  s.description = %q{With a given username get user's favorite artists, songs. Also recent acitvity,
+                      current station and list of the user created stations.}
+  
+  s.add_runtime_dependency 'nokogiri','~> 1.4'
+  
   s.rubyforge_project = "pandora"
 
   s.files         = `git ls-files`.split("\n")

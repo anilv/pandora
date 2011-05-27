@@ -1,3 +1,4 @@
-module Pandora
-  # Your code goes here...
-end
+require 'open-uri'
+require 'nokogiri'
+
+require 'pandora/request'
