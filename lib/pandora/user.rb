@@ -48,7 +48,11 @@ module Pandora
                       :link        => node.xpath('link').text,
                       :description => node.xpath('description').text,
                       :date        => node.xpath('pubDate').text,
-                      :artwork     => node.xpath('pandora:stationAlbumArtImageUrl').text }
+                      :artwork     => node.xpath('pandora:stationAlbumArtImageUrl').text,
+                      :songSeed_song   => node.xpath('pandora:seeds/pandora:songSeed/pandora:song').text,
+                      :songSeed_artist => node.xpath('pandora:seeds/pandora:songSeed/pandora:artist').text,
+                      :composerSeed    => node.xpath('pandora:seeds/pandora:composerSeed/pandora:composer').text,
+                      :artistSeed      => node.xpath('pandora:seeds/pandora:artistSeed/pandora:artist') }
       end
       stations
     end
@@ -61,8 +65,13 @@ module Pandora
                      :link        => node.xpath('link').text,
                      :description => node.xpath('description').text,
                      :date        => node.xpath('pubDate').text,
-                     :artwork     => node.xpath('pandora:stationAlbumArtImageUrl').text }
+                     :artwork     => node.xpath('pandora:stationAlbumArtImageUrl').text,
+                     :songSeed_song   => node.xpath('pandora:seeds/pandora:songSeed/pandora:song').text,
+                     :songSeed_artist => node.xpath('pandora:seeds/pandora:songSeed/pandora:artist').text,
+                     :composerSeed    => node.xpath('pandora:seeds/pandora:composerSeed/pandora:composer').text,
+                     :artistSeed      => node.xpath('pandora:seeds/pandora:artistSeed/pandora:artist') }
       end
+      station
     end
     
     def recent_activity
@@ -79,6 +88,7 @@ module Pandora
                    :artwork     => node.xpath('pandora:albumArtUrl').text,
                    :station     => node.xpath('pandora:stationLink').text }
       end
+      items
     end
   end
 end
