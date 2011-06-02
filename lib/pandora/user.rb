@@ -13,7 +13,7 @@ module Pandora
     
     # Create a new user and make sure no whitespace, since it will be parsed as url in the request.
     def initialize(user)
-      @user = user.strip
+      @user = user.downcase.strip
     end
     
     # == Returns the Bookmarked Songs
@@ -36,15 +36,15 @@ module Pandora
       doc = request(@user, "favorites")
       songs = []
       doc.xpath('//rss/channel/item').each do |node|
-        songs << { :title       => node.xpath('title').text,
-                   :link        => node.xpath('link').text,
-                   :description => node.xpath('description').text,
-                   :date        => node.xpath('pubDate').text,
-                   :track       => node.xpath('mm:Track/dc:title').text,
-                   :artist      => node.xpath('mm:Artist/dc:title').text,
-                   :album       => node.xpath('mm:Album/dc:title').text,
-                   :artwork     => node.xpath('pandora:albumArtUrl').text,
-                   :station     => node.xpath('pandora:stationLink').text }
+        songs << { :title       => node.xpath('title').text.strip,
+                   :link        => node.xpath('link').text.strip,
+                   :description => node.xpath('description').text.strip,
+                   :date        => node.xpath('pubDate').text.strip,
+                   :track       => node.xpath('mm:Track/dc:title').text.strip,
+                   :artist      => node.xpath('mm:Artist/dc:title').text.strip,
+                   :album       => node.xpath('mm:Album/dc:title').text.strip,
+                   :artwork     => node.xpath('pandora:albumArtUrl').text.strip,
+                   :station     => node.xpath('pandora:stationLink').text.strip }
       end
       songs
     end
@@ -65,12 +65,12 @@ module Pandora
       doc = request(@user, "favoriteartists")
       artists = []
       doc.xpath('//rss/channel/item').each do |node|
-        artists << { :title       => node.xpath('title').text,
-                     :link        => node.xpath('link').text,
-                     :description => node.xpath('description').text,
-                     :date        => node.xpath('pubDate').text,
-                     :artist      => node.xpath('mm:Artist/dc:title').text,
-                     :station     => node.xpath('pandora:stationLink').text }
+        artists << { :title       => node.xpath('title').text.strip,
+                     :link        => node.xpath('link').text.strip,
+                     :description => node.xpath('description').text.strip,
+                     :date        => node.xpath('pubDate').text.strip,
+                     :artist      => node.xpath('mm:Artist/dc:title').text.strip,
+                     :station     => node.xpath('pandora:stationLink').text.strip }
       end
       artists
     end
@@ -95,15 +95,15 @@ module Pandora
       doc = request(@user, "stations")
       stations = []
       doc.xpath('//rss/channel/item').each do |node|
-        stations << { :title       => node.xpath('title').text,
-                      :link        => node.xpath('link').text,
-                      :description => node.xpath('description').text,
-                      :date        => node.xpath('pubDate').text,
-                      :artwork     => node.xpath('pandora:stationAlbumArtImageUrl').text,
-                      :songSeed_song   => node.xpath('pandora:seeds/pandora:songSeed/pandora:song').text,
-                      :songSeed_artist => node.xpath('pandora:seeds/pandora:songSeed/pandora:artist').text,
-                      :composerSeed    => node.xpath('pandora:seeds/pandora:composerSeed/pandora:composer').text,
-                      :artistSeed      => node.xpath('pandora:seeds/pandora:artistSeed/pandora:artist') }
+        stations << { :title       => node.xpath('title').text.strip,
+                      :link        => node.xpath('link').text.strip,
+                      :description => node.xpath('description').text.strip,
+                      :date        => node.xpath('pubDate').text.strip,
+                      :artwork     => node.xpath('pandora:stationAlbumArtImageUrl').text.strip,
+                      :songSeed_song   => node.xpath('pandora:seeds/pandora:songSeed/pandora:song').text.strip,
+                      :songSeed_artist => node.xpath('pandora:seeds/pandora:songSeed/pandora:artist').text.strip,
+                      :composerSeed    => node.xpath('pandora:seeds/pandora:composerSeed/pandora:composer').text.strip,
+                      :artistSeed      => node.xpath('pandora:seeds/pandora:artistSeed/pandora:artist').text.strip}
       end
       stations
     end
@@ -128,15 +128,15 @@ module Pandora
       doc = request(@user, "nowplaying")
       station = []
       doc.xpath('//rss/channel/item').each do |node|
-        station << { :title       => node.xpath('title').text,
-                     :link        => node.xpath('link').text,
-                     :description => node.xpath('description').text,
-                     :date        => node.xpath('pubDate').text,
-                     :artwork     => node.xpath('pandora:stationAlbumArtImageUrl').text,
-                     :songSeed_song   => node.xpath('pandora:seeds/pandora:songSeed/pandora:song').text,
-                     :songSeed_artist => node.xpath('pandora:seeds/pandora:songSeed/pandora:artist').text,
-                     :composerSeed    => node.xpath('pandora:seeds/pandora:composerSeed/pandora:composer').text,
-                     :artistSeed      => node.xpath('pandora:seeds/pandora:artistSeed/pandora:artist') }
+        station << { :title       => node.xpath('title').text.strip,
+                     :link        => node.xpath('link').text.strip,
+                     :description => node.xpath('description').text.strip,
+                     :date        => node.xpath('pubDate').text.strip,
+                     :artwork     => node.xpath('pandora:stationAlbumArtImageUrl').text.strip,
+                     :songSeed_song   => node.xpath('pandora:seeds/pandora:songSeed/pandora:song').text.strip,
+                     :songSeed_artist => node.xpath('pandora:seeds/pandora:songSeed/pandora:artist').text.strip,
+                     :composerSeed    => node.xpath('pandora:seeds/pandora:composerSeed/pandora:composer').text.strip,
+                     :artistSeed      => node.xpath('pandora:seeds/pandora:artistSeed/pandora:artist').text.strip }
       end
       station
     end
@@ -161,15 +161,15 @@ module Pandora
       doc = request(@user, "recentactivity")
       items = []
       doc.xpath('//rss/channel/item').each do |node|
-        items << { :title       => node.xpath('title').text,
-                   :link        => node.xpath('link').text,
-                   :description => node.xpath('description').text,
-                   :date        => node.xpath('pubDate').text,
-                   :track       => node.xpath('mm:Track/dc:title').text,
-                   :artist      => node.xpath('mm:Artist/dc:title').text,
-                   :album       => node.xpath('mm:Album/dc:title').text,
-                   :artwork     => node.xpath('pandora:albumArtUrl').text,
-                   :station     => node.xpath('pandora:stationLink').text }
+        items << { :title       => node.xpath('title').text.strip,
+                   :link        => node.xpath('link').text.strip,
+                   :description => node.xpath('description').text.strip,
+                   :date        => node.xpath('pubDate').text.strip,
+                   :track       => node.xpath('mm:Track/dc:title').text.strip,
+                   :artist      => node.xpath('mm:Artist/dc:title').text.strip,
+                   :album       => node.xpath('mm:Album/dc:title').text.strip,
+                   :artwork     => node.xpath('pandora:albumArtUrl').text.strip,
+                   :station     => node.xpath('pandora:stationLink').text.strip}
       end
       items
     end
