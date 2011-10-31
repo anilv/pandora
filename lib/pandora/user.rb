@@ -95,15 +95,16 @@ module Pandora
       doc = request(@user, "stations")
       stations = []
       doc.xpath('//rss/channel/item').each do |node|
-        stations << { :title       => node.xpath('title').text.strip,
-                      :link        => node.xpath('link').text.strip,
-                      :description => node.xpath('description').text.strip,
-                      :date        => node.xpath('pubDate').text.strip,
-                      :artwork     => node.xpath('pandora:stationAlbumArtImageUrl').text.strip,
-                      :songSeed_song   => node.xpath('pandora:seeds/pandora:songSeed/pandora:song').text.strip,
-                      :songSeed_artist => node.xpath('pandora:seeds/pandora:songSeed/pandora:artist').text.strip,
-                      :composerSeed    => node.xpath('pandora:seeds/pandora:composerSeed/pandora:composer').text.strip,
-                      :artistSeed      => node.xpath('pandora:seeds/pandora:artistSeed/pandora:artist').text.strip}
+        seeds = parse_seeds(node)
+        
+        stations << { :title          => node.xpath('title').text.strip,
+                      :link           => node.xpath('link').text.strip,
+                      :description    => node.xpath('description').text.strip,
+                      :date           => node.xpath('pubDate').text.strip,
+                      :artwork        => node.xpath('pandora:stationAlbumArtImageUrl').text.strip,
+                      :songSeed       => seeds[:song],
+                      :composerSeed   => seeds[:composer],
+                      :artistSeed     => seeds[:artist]}
       end
       stations
     end
@@ -128,15 +129,16 @@ module Pandora
       doc = request(@user, "nowplaying")
       station = []
       doc.xpath('//rss/channel/item').each do |node|
-        station << { :title       => node.xpath('title').text.strip,
-                     :link        => node.xpath('link').text.strip,
-                     :description => node.xpath('description').text.strip,
-                     :date        => node.xpath('pubDate').text.strip,
-                     :artwork     => node.xpath('pandora:stationAlbumArtImageUrl').text.strip,
-                     :songSeed_song   => node.xpath('pandora:seeds/pandora:songSeed/pandora:song').text.strip,
-                     :songSeed_artist => node.xpath('pandora:seeds/pandora:songSeed/pandora:artist').text.strip,
-                     :composerSeed    => node.xpath('pandora:seeds/pandora:composerSeed/pandora:composer').text.strip,
-                     :artistSeed      => node.xpath('pandora:seeds/pandora:artistSeed/pandora:artist').text.strip }
+        seeds = parse_seeds(node)
+        
+        station << { :title         => node.xpath('title').text.strip,
+                     :link          => node.xpath('link').text.strip,
+                     :description   => node.xpath('description').text.strip,
+                     :date          => node.xpath('pubDate').text.strip,
+                     :artwork       => node.xpath('pandora:stationAlbumArtImageUrl').text.strip,
+                     :songSeed      => seeds[:song],
+                     :composerSeed  => seeds[:composer],
+                     :artistSeed    => seeds[:artist]}
       end
       station
     end
@@ -173,5 +175,37 @@ module Pandora
       end
       items
     end
+    
+    private
+      def parse_seeds(node)
+        seeds = {
+          :song     => [],
+          :composer => [],
+          :artist   => []
+        }
+        
+        if node.is_a? Nokogiri::XML::Node
+          node.xpath('pandora:seeds/pandora:songSeed').each do |s|
+            
+            song    = s.xpath("pandora:song").text.strip
+            artist  = s.xpath("pandora:artist").text.strip
+            
+            seeds[:song] << {
+              :song   => song,
+              :artist => artist
+            }
+          end
+          
+          node.xpath('pandora:seeds/pandora:composerSeed/pandora:composer').each do |c|
+            seeds[:composer] << c.text.strip
+          end
+          
+          node.xpath('pandora:seeds/pandora:artistSeed/pandora:artist').each do |a|
+            seeds[:artist] << a.text.strip
+          end
+        end
+        
+        seeds
+      end
   end
 end
