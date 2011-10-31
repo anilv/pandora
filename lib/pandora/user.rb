@@ -86,10 +86,9 @@ module Pandora
     # description:: Description of the station
     # date:: Date the station was created
     # artwork:: Artwork of the station
-    # songSeed_song:: Name of song used to create station
-    # songSeed_artist:: Name of the artist for the song used to create the station
-    # composerSeed:: Name of the composer used to create the station
-    # artistSeed:: Name of the artist used to create the station
+    # songSeed:: Array of hashes {:song => "..", :artist => ".."} representing songs used to create the station
+    # composerSeed:: Array of names of the composers used to create the station
+    # artistSeed:: Array of names of the artists used to create the station
     #
     def stations
       doc = request(@user, "stations")
@@ -120,10 +119,9 @@ module Pandora
     # description:: Description of the station
     # date:: Date the station was last played
     # artwork:: Artwork of the station
-    # songSeed_song:: Name of song used to create station
-    # songSeed_artist:: Name of the artist for the song used to create the station
-    # composerSeed:: Name of the composer used to create the station
-    # artistSeed:: Name of the artist used to create the station
+    # songSeed:: Array of hashes {:song => "..", :artist => ".."} representing songs used to create the station
+    # composerSeed:: Array of names of the composers used to create the station
+    # artistSeed:: Array of names of the artists used to create the station
     #
     def now_playing
       doc = request(@user, "nowplaying")
