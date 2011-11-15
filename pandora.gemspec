@@ -12,6 +12,8 @@ Gem::Specification.new do |s|
   s.description = %q{A Ruby wrapper for the Pandora public user feeds}
   
   s.add_runtime_dependency 'nokogiri','~> 1.4'
+  s.add_development_dependency 'rake'
+  s.add_development_dependency 'yard'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
