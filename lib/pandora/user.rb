@@ -10,6 +10,7 @@ module Pandora
     include Pandora::Request # Include the Request module to invoke Nokogiri.
     
     attr_accessor :user
+    alias_method :name, :user
     
     # Create a new user and make sure no whitespace, since it will be parsed as url in the request.
     def initialize(user)
